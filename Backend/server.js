@@ -21,15 +21,16 @@ app.use((req, res, next) => {
 })
 
 global.logedIn_users = [];
-global.current_users_ID = 1;
+global.current_users_ID;
 
 //end point for access
 app.use("/login", Access);
 
-// app.use((req, res, next) => {
-//     checkAccessToken(req, res, next);
-//     next();
-// })
+app.use((req, res, next) => {
+    console.log("check token")
+    checkAccessToken(req, res, next);
+    next();
+})
 
 //end point for user
 app.use("/users", UserRouter);
@@ -38,6 +39,9 @@ app.use("/users", UserRouter);
 // //end point for rating
 // app.use("/permission", permissionRouter);
 
+// error handeler middleware
+app.use(errorHandler);
+
 app.listen(process.env.PORT, (err) => {
     if (err)
         console.log("the port " + process.env.PORT + " is busy");
@@ -45,5 +49,3 @@ app.listen(process.env.PORT, (err) => {
         console.log("the server started correcttly on port " + process.env.PORT);
 });
 
-// error handeler middleware
-app.use(errorHandler);

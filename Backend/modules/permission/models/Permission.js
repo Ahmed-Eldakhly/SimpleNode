@@ -71,3 +71,6 @@
 // })
 // const ratingModel = mongoose.model("Rating",ratingShcema);
 // module.exports = ratingModel;
+
+
+

@@ -40,7 +40,7 @@ async function userAccessController(request, response, next) {
                 console.log(token.refreshToken)
                 response.status(200).json({
                     accessToken: token.accessToken,
-                    refreshToken: token.refreshToken
+                    //refreshToken: token.refreshToken
                 });
                 console.log(logedIn_users)
             }
