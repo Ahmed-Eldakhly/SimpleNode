@@ -1,32 +1,30 @@
-// const express = require('express')
-// const RatingController = require('../controllers/RatingController')
-// const checkAccessToken = require("../../../middlewares/middleware")
-// const Role = require("../../../helpers/Role")
+const express = require('express')
+const {index,store,show,update,destroy} = require('../controllers/PermissionController')
 
-// const ratingRouter = express.Router()
+const PermissionRouter = express.Router()
 
 
-// ratingRouter.get("/", (request, response, next)=> {
-//     RatingController.index(request, response, next);   
-// }) 
+PermissionRouter.get("/", (request, response, next)=> {
+    index(request, response, next);   
+}) 
 
-// ratingRouter.get("/:id", (request, response, next)=> {
-//     RatingController.show(request, response, next);   
-// }) 
+PermissionRouter.get("/:id", (request, response, next)=> {
+    show(request, response, next);   
+}) 
 
-// // , checkAccessToken(Role.USER)
-// ratingRouter.post("/", (request, response, next)=> {
-//     RatingController.store(request, response, next);
-// })
+// , checkAccessToken(Role.USER)
+PermissionRouter.post("/", (request, response, next)=> {
+    store(request, response, next);
+})
 
-// // , checkAccessToken(Role.USER)
-// ratingRouter.patch("/:bookId/:userId", (request, response, next)=> {
-//     RatingController.update(request, response, next);
-// })
+// , checkAccessToken(Role.USER)
+PermissionRouter.patch("/:id", (request, response, next)=> {
+    update(request, response, next);
+})
 
-// // , checkAccessToken(Role.ADMIN)
-// ratingRouter.delete("/:id", (request, response, next)=> {
-//     RatingController.destroy(request, response, next);
-// })
+// , checkAccessToken(Role.ADMIN)
+PermissionRouter.delete("/:id", (request, response, next)=> {
+    destroy(request, response, next);
+})
 
-// module.exports = ratingRouter;
+module.exports = PermissionRouter;

@@ -13,7 +13,7 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors())
+app.use(cors());
 
 app.use((req, res, next) => {
     console.log(new Date(), req.url, req.method)
@@ -23,24 +23,20 @@ app.use((req, res, next) => {
 global.logedIn_users = [];
 global.current_users_ID;
 
-//end point for access
+// end point for access
 app.use("/login", Access);
 
+// middleware to check on the token
 app.use((req, res, next) => {
     console.log("check token")
     checkAccessToken(req, res, next);
-    next();
 })
 
-//end point for user
+// end point for user
 app.use("/users", UserRouter);
 
-
-// //end point for rating
-// app.use("/permission", permissionRouter);
-
-// error handeler middleware
-app.use(errorHandler);
+//end point for permission
+app.use("/permissions", permissionRouter);
 
 app.listen(process.env.PORT, (err) => {
     if (err)
@@ -49,3 +45,6 @@ app.listen(process.env.PORT, (err) => {
         console.log("the server started correcttly on port " + process.env.PORT);
 });
 
+
+//error handeler middleware
+app.use(errorHandler);

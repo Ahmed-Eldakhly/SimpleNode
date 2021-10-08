@@ -1,22 +1,18 @@
 const express = require('express')
 const {index,store,show,update,destroy} = require('../controllers/UserController')
 
-const User = require('../models/User');
-//const advancedResults = require('../../../middlewares/advancedQueries');
-
 const userRouter = express.Router()
 
-const checkAccessToken = require("../../../middlewares/middleware")
-
 userRouter.get("/", (request, response, next)=> {
-    index(request, response, next);   
-}) 
+    index(request, response, next);
+})
 
 userRouter.get("/:id", async (request, response, next)=> {
+    console.log(request.params.id)
     show(request, response, next);
 })
 
-userRouter.post("/", (request, response, next)=> {
+userRouter.post("/", async(request, response, next)=> {
     store(request, response, next);
 })
 

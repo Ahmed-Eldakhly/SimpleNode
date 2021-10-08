@@ -1,7 +1,6 @@
 const tokenGeneration = require('../helpers/tokenGeneration')
 const ResponseCode = require("../response-codes");
 const jwt = require("jsonwebtoken");
-const User = require("../modules/user/models/User");
 const { response } = require('express');
 
 //check on token
@@ -18,10 +17,11 @@ function checkAccessToken(req, res, next) {
                 if(logedIn_users[i].accessToken === bearer)
                 {
                     current_users_ID = logedIn_users[i].User_ID;
-                    break;
+                    next();
+                    return;
                 }
             }
-            next();
+            next(ResponseCode.AUTHENTICATION_ERROR);
         } catch (error) {
             // checkRefreshToken(req, res, next);
             next(ResponseCode.AUTHENTICATION_ERROR);
